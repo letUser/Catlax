@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./lib/vue.min.js"></script>
+    <script src="./lib/element.js"></script>
+    <script src="./lib/axios.js"></script>
+    <link rel="stylesheet" href="./lib/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@500&display=swap" rel="stylesheet">
+    <title>Relaxing Kitties TM</title>
+</head>
+<body>
+    <style>
+        body {
+            background-color: #FAE6C3;
+            margin: 0;
+            height: 420px;
+            padding: 0;
+            width: 380px;
+            user-select: none;
+        }
+    
+        img {
+            pointer-events: none;
+        }
+    
+        #header {
+            font-family: 'Sansita Swashed', cursive;
+            color: white;
+            font-size: 16px;
+            background-color: #396F6D;
+            padding: 0.1em 0.1em 0.1em 0.1em;
+            text-align: center;
+            font-family: 'Sansita Swashed', cursive;
+        }
+    
+        #player {
+            width: 220px;
+            height: 200px;
+            background-color: transparent;
+        }
+    
+        #control {
+            text-align: center;
+            margin-top: 2em;
+        }
+    
+        #video {
+            text-align: center;
+            margin-top: 2em;
+        }
+    
+        .bttn, .bttn:focus {
+            width: 10em;
+            background-color: #D06F64;
+            border-color: #D06F64;
+        }
+    
+        .bttn:hover, .bttn:active {
+            background-color: #A13A45;
+            border-color: #A13A45;
+        }
+    
+        .hidenBttn, .hidenBttn:focus {
+            width: 10em;
+            background-color: #d06f6433;
+            border-color: #d06f6433;
+        }
+    
+        .hidenBttn:hover, .hidenBttn:active {
+            background-color: #A13A45;
+            border-color: #A13A45;
+        }
+    
+        .arrow {
+            width: 13em;
+            margin: 0;
+            padding: 5px 0 5px 0;
+            background-color: #D06F64;
+            border-color: #D06F64;
+        }
+        
+        .arrow:focus {
+            background-color: #D06F64;
+            border-color: #D06F64;
+        }
+    
+        .arrow:hover, .arrow:active {
+            background-color: #A13A45;
+            border-color: #A13A45;
+        }
+    
+        .arrow:disabled {
+            background-color: #5555558f;
+            border-color: #5555558f;
+        }
+    
+        .arrow:disabled:hover {
+            background-color: #7272728f;
+            border-color: #7272728f;
+        }
+    
+        #coffee {
+            height: 95px;
+            transform: rotate(22deg) translateX(-4px) translateY(4px);
+        }
+    
+        #notebook {
+            height: 88px;
+            transform: translateX(285px) translateY(-65px) scale(-1, 1);
+        }
+    </style>
+
+    <div class="container-fluid" id="app">
+        <div id="header">
+            <div style="position: absolute">    
+                <img src="images/coffee.png" id="coffee"></img>
+            </div>
+            <h2> Relaxing Kitties ™ </h2>
+            <div style="position: absolute">
+                <img src="images/notebook.png" id="notebook"></img>
+            </div>
+        </div>
+        <div id="video" v-if="!showVid">
+            <img id="player" src="images/player1.png"></img>
+            <el-alert
+                v-if="error"
+                title="Oops! Sorry, but my quota let`s play only 10.000 vids per day for all users. Try again tomorrow!"
+                type="error"
+                :closable="false"
+                effect="dark"
+            ></el-alert>
+        </div>
+        <div id="video" v-else="showVid">
+            <iframe
+                width="378"
+                height="200"
+                :src="source"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+            </iframe>
+            <div>
+                <el-button
+                    class="arrow"
+                    type="primary"
+                    icon="el-icon-arrow-left"
+                    @click="prevVideo"
+                    :disabled="!prevVids || prevVids.length === 1"
+                    title="show previous"
+                ></el-button>
+                <el-button
+                    class="arrow"
+                    type="primary"
+                    icon="el-icon-arrow-right"
+                    @click="nextVideo"
+                    title="show next"
+                ></el-button>
+            </div>
+        </div>
+        <div id="control">
+            <el-button :class="!showVid ? 'bttn' : 'hidenBttn'" type="primary" @click="startCute"> Cute Kitties </el-button>
+            <el-button :class="!showVid ? 'bttn' : 'hidenBttn'" type="primary" @click="startFun"> Funny Kitties </el-button>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
