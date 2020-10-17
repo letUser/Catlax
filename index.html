@@ -7,8 +7,8 @@
     <script src="./lib/element.js"></script>
     <script src="./lib/axios.js"></script>
     <link rel="stylesheet" href="./lib/index.css">
-    <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@500&display=swap" rel="stylesheet">
-    <title>Relaxing Kitties TM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@900&display=swap" rel="stylesheet">
+    <title>Catlax TM</title>
 </head>
 <body>
     <style>
@@ -32,7 +32,7 @@
             background-color: #396F6D;
             padding: 0.1em 0.1em 0.1em 0.1em;
             text-align: center;
-            font-family: 'Sansita Swashed', cursive;
+            letter-spacing: 7px;
         }
     
         #player {
@@ -103,12 +103,12 @@
     
         #coffee {
             height: 95px;
-            transform: rotate(22deg) translateX(-4px) translateY(4px);
+            transform: rotate(22deg) translateX(5px) translateY(4px);
         }
     
-        #notebook {
-            height: 88px;
-            transform: translateX(285px) translateY(-65px) scale(-1, 1);
+        #hero {
+            height: 83px;
+            transform: translateX(275px) translateY(-60px) scale(-1, 1);
         }
     </style>
 
@@ -117,9 +117,9 @@
             <div style="position: absolute">    
                 <img src="images/coffee.png" id="coffee"></img>
             </div>
-            <h2> Relaxing Kitties ™ </h2>
+            <h2> Catlax™ </h2>
             <div style="position: absolute">
-                <img src="images/notebook.png" id="notebook"></img>
+                <img src="images/hero.png" id="hero"></img>
             </div>
         </div>
         <div id="video" v-if="!showVid">
@@ -144,18 +144,16 @@
                 <el-button
                     class="arrow"
                     type="primary"
-                    icon="el-icon-arrow-left"
                     @click="prevVideo"
                     :disabled="!prevVids || prevVids.length === 1"
                     title="show previous"
-                ></el-button>
+                >&#10094;</el-button>
                 <el-button
                     class="arrow"
                     type="primary"
-                    icon="el-icon-arrow-right"
                     @click="nextVideo"
                     title="show next"
-                ></el-button>
+                >&#10095;</el-button>
             </div>
         </div>
         <div id="control">
